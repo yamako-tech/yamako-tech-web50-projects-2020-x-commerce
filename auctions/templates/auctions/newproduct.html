@@ -1,0 +1,29 @@
+{% extends "auctions/layout.html" %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block body %}
+
+{% if user.is_authenticated %}
+
+<div class="mx-auto" style="width: 800px;">
+<div class="col-md-8">
+    <div class="card mb-4 mt-4">
+        <div class="card-header">
+            Create New Auction
+        </div>
+        <div class="card-body">
+            <form action="{% url 'newproduct' %}" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <input type="submit" value="Add New Product" class="btn btn-info">
+            </form>
+        </div>
+    </div>
+</div>
+</div>
+{% else %}
+    Please login
+    <a href="{% url 'login' %}"></a>
+{% endif %}
+{% endblock %}

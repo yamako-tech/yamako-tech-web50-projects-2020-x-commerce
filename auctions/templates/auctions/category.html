@@ -1,0 +1,20 @@
+{% extends "auctions/layout.html" %}
+{% load static %}
+
+{% block body %}
+
+
+<div class="grid-container text-center">
+    <h2>All Categories</h2> 
+    <img src="{% static 'images/auction.jpg' %}" style="max-height:150px"/>
+    <br><br><hr>
+    {% for category in category %}
+    
+    <a href="{% url 'search' category.name %}">
+        <div class="grid-item">
+            <p class="fs-4"><button type="button" class="btn btn-outline-primary">{{ category.name|title }}</button></p>
+        </div>
+    </a>
+    {% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends "auctions/layout.html" %}
+{% load static %}
+
+{% block body %}
+<br><br>
+<h1 class="text-4xl text-blue-700 text-center font-bold mt-2 border border-dotted">Active Listings</h1>
+<br><br>
+
+<div class="container">
+    <div class="row">
+        {% for product in objects %}
+        <div class="col-lg-3 col-md-6">
+            <div class="card img-thumbail teacherlist mb-3">
+                <img src="{{ product.image.url }}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">{{ product.title }}</h5>
+                    <p class="card-text">{{ product.description|truncatewords:10 }}</p>
+                    <h6>Price: $<strong>{{ product.starting_price }}</strong></h6>
+                    <a href="{% url 'detail' product.id %}" class="btn btn-primary">Details</a>
+                </div>
+                {% comment %}
+                {% if product in user.watchlist.all %}
+                <span class="badge status--watchlist">My watchlist</span>
+                {% else %}
+                <span class="badge status--not_watchlist">Add to my watchlist</span>
+                {% endif %}
+                {% endcomment %}
+            </div>
+        </div>    
+    {% endfor %}
+    </div>
+</div>
+
+    
+{% endblock %}
